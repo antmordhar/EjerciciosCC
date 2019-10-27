@@ -250,4 +250,6 @@ sudo: false
 jdk:
   - oraclejdk8
   - oraclejdk9
+os:
+  - linux
 ```
