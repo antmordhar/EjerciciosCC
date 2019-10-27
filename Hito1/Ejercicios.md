@@ -241,28 +241,13 @@ public class mesa {
 **Ejercicio 5**
 >Añadir integracion continual proyecto de Cloud Computing.
 
+Realizaremos esta tarea con travis. Entramos a travis y autorizamos la union con git hub. Despues activamos travis en nuetro proyecto.
+
+Por ultimo creamos la configuración en travis.yml para este:
 ```
-1. sudo apt-get install openjdk-8-jre-headless -y
-2. wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
-3. sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-4. sudo apt-get update
-5. sudo apt-get install jenkins
-6. sudo nano /var/lib/jenkins/secrets/initialAdminPassword
+language: java
+sudo: false
+jdk:
+  - oraclejdk8
+  - oraclejdk9
 ```
-Copiamos la contraseña que se nos mostrara con el nano y la pegamos en el navegador.
-para ello entramos al localhost:8080
-
-Ahora vamos a instalar el plugin para github. Para ello lo buscamos en manage plugin. Buscamos Github Integration.
-
-Después reiniciamos Jenkins.
-
-Ahora debemos generar un tocken en github y, en Jenkins, dentro de configuracion global añadir un git hub server con texto secreto y pegar nuestro token.
-
-Por ultimo vamos a enlazar nuestro repositorio con Jenkins.
-Esto se realiza clicando en new Item. Le ponemos nombre y seleccionamos Freestyle project.
-
-Ahora seleccionamos Git en el apartado de Source Code Management y ponemos la url de nuestro repositorio.
-
-Despues hay que descargar ngrok y crear una live URL para el puerto 8080. Esto es por que Git no acepta las URL locales. Ahora en git tenemos que añadir esta url a WebHooks dentro de la configuracion de git hub.
-
-Con esto ya estaría Jenkins integrado con GitHub
