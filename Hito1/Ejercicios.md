@@ -149,12 +149,14 @@ Ahora en la terminal anterior paramos la ejecucion
 
 Vamos a crear un grupo de imposiciones para una clase en java con JUnit.
 
-``` package Mesas;
+```
+package Mesas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -163,9 +165,10 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 public class testmesa {
 	private mesa mesatest;
 	@Test
-	public void testConstruction() {
+	public void testConstruction() throws JSONException {
 		mesatest= new mesa();
-		assertNotEquals("ID mesa Correcto",0,mesatest.getNummesa());
+		int nummesa=mesatest.getNummesa();
+		assertEquals("ID mesa Correcto",0,is(not(mesatest.getNummesa())));
 		
 		int nummesatest=mesatest.getNummesa();
 		JSONArray Jtest = new JSONArray();
@@ -175,17 +178,18 @@ public class testmesa {
 	@Test
 	public void testGetNummesa() {
 		mesatest= new mesa();
-		assertNotEquals("ID mesa Correcto",0,mesatest.getNummesa());
+		int nummesa=mesatest.getNummesa();
+		assertEquals("ID mesa Correcto",0,is(not(mesatest.getNummesa())));
 	}
 	@Test
-	public void testGetPedido() {
+	public void testGetPedido() throws JSONException {
 		mesatest= new mesa();
 		JSONArray Jtest = new JSONArray();
 		Jtest.put(mesatest.getNummesa());
 		JSONAssert.assertEquals(Jtest,mesatest.getPedido(),  JSONCompareMode.LENIENT);
 	}
 	@Test
-	public void testaniadirPlato() {
+	public void testaniadirPlato() throws JSONException {
 		mesatest= new mesa();
 		mesatest.aniadirPlato("PolloFrito", 5, 2);
 		JSONArray Jtest = new JSONArray();
@@ -197,8 +201,6 @@ public class testmesa {
 		Jtest.put(nuevoped);
 		JSONAssert.assertEquals(Jtest,mesatest.getPedido(),  JSONCompareMode.LENIENT);
 	}
-	
-}
 ```
 Y esta es la clase que Testea el anterior JUnit
 
